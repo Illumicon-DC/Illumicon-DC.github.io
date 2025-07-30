@@ -1,7 +1,1846 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="illumicon" name="apple-mobile-web-app-title"/>
+<title>illumicon</title>
+<style>
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI+Variable:wght@400;500;600;700&display=swap');
+
+:root {
+  /* The default font size for the application */
+  --font-size: 16px;
+  
+  /* Vaporwave color palette */
+  --background: linear-gradient(135deg, rgba(255, 20, 147, 1.00) 0%, rgba(0, 191, 255, 1.00) 100%);
+  --foreground: rgba(255, 255, 255, 1.00);
+  --card: rgba(255, 255, 255, 0.1);
+  --card-foreground: rgba(255, 255, 255, 1.00);
+  --popover: rgba(138, 43, 226, 0.95);
+  --popover-foreground: rgba(255, 255, 255, 1.00);
+  --primary: rgba(255, 20, 147, 1.00);
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  --secondary: rgba(0, 191, 255, 0.3);
+  --secondary-foreground: rgba(255, 255, 255, 1.00);
+  --muted: rgba(138, 43, 226, 0.2);
+  --muted-foreground: rgba(255, 255, 255, 0.8);
+  --accent: rgba(0, 255, 255, 1.00);
+  --accent-foreground: rgba(0, 0, 0, 1.00);
+  --destructive: rgba(255, 69, 0, 1.00);
+  --destructive-foreground: rgba(255, 255, 255, 1.00);
+  --border: rgba(0, 255, 255, 0.5);
+  --input: rgba(255, 255, 255, 0.1);
+  --input-background: rgba(138, 43, 226, 0.3);
+  --ring: rgba(0, 255, 255, 1.00);
+  --elevation-sm: 0px 8px 32px rgba(255, 20, 147, 0.3), 0px 4px 16px rgba(0, 191, 255, 0.2);
+  
+  /* Vaporwave chart colors */
+  --chart-1: rgba(255, 20, 147, 1.00); /* Hot pink */
+  --chart-2: rgba(0, 255, 255, 1.00); /* Cyan */
+  --chart-3: rgba(138, 43, 226, 1.00); /* Blue violet */
+  --chart-4: rgba(255, 105, 180, 1.00); /* Hot pink light */
+  --chart-5: rgba(0, 191, 255, 1.00); /* Deep sky blue */
+  
+  --radius: 0px; /* Sharp corners for retro look */
+  --radius-button: 0px;
+  --radius-input: 0px;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+html {
+  font-size: var(--font-size);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #ff1493 0%, #00bfff 100%);
+  color: var(--foreground);
+  min-height: 100vh;
+  font-family: 'Segoe UI Variable', sans-serif;
+}
+
+/* Typography */
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 72px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+  font-family: 'Georgia', serif;
+  font-size: 55px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h3 {
+  font-family: 'Georgia', serif;
+  font-size: 48px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+h4 {
+  font-family: 'Georgia', serif;
+  font-size: 36px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+p {
+  font-family: 'Segoe UI Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.callout {
+  font-family: 'Georgia', serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.subheading {
+  font-family: 'Segoe UI Variable', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.metric {
+  font-family: 'Inter', sans-serif;
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.caption {
+  font-family: 'Segoe UI Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Button styles */
+button {
+  font-family: 'Segoe UI Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #ff1493, #00ffff);
+  color: white;
+  border: 2px solid #00ffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #00ffff, #ff1493);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 255, 255, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(138, 43, 226, 0.3);
+  color: white;
+  border: 2px solid rgba(0, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: black;
+}
+
+/* Retro window styling */
+.retro-window {
+  background: rgba(192, 192, 192, 0.95);
+  border: 2px outset #c0c0c0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.retro-window-header {
+  background: linear-gradient(90deg, #00ffff 0%, #ff69b4 50%, #8a2be2 100%);
+  color: white;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #808080;
+}
+
+.retro-window-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.retro-button {
+  width: 16px;
+  height: 16px;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: black;
+}
+
+.retro-button:active {
+  border: 1px inset #c0c0c0;
+}
+
+/* Feature Grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-card {
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: scale(1.05);
+}
+
+.feature-content {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 255, 255, 0.1));
+  backdrop-filter: blur(4px);
+  text-align: center;
+}
+
+.feature-content.gradient-accent {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+}
+
+.feature-content.gradient-chart-2 {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 105, 180, 0.1));
+}
+
+.feature-content.gradient-chart-4 {
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), rgba(0, 255, 255, 0.1));
+}
+
+.feature-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  background-image: radial-gradient(circle, rgba(0, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+.feature-content p {
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.progress-container {
+  background: #1f2937;
+  height: 8px;
+  border: 1px solid #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(45deg, #00ffff, #ff69b4);
+  transition: width 1.5s ease-out;
+}
+
+.progress-bar.gradient-accent {
+  background: linear-gradient(45deg, #00ffff, #00ffff);
+}
+
+.progress-bar.gradient-chart-2 {
+  background: linear-gradient(45deg, #00ffff, #ff69b4);
+}
+
+.progress-bar.gradient-chart-4 {
+  background: linear-gradient(45deg, #ff69b4, #00ffff);
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-family: 'Courier New', monospace;
+}
+
+/* System Info Section */
+.system-info-content {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(107, 33, 168, 0.3), rgba(37, 99, 235, 0.3));
+  backdrop-filter: blur(4px);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.stat-item:hover .stat-value {
+  color: var(--chart-2);
+}
+
+.stat-label {
+  font-family: 'Segoe UI Variable', sans-serif;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.stat-unit {
+  font-family: 'Segoe UI Variable', sans-serif;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.75rem;
+}
+
+.stat-indicator {
+  display: flex;
+  justify-content: center;
+}
+
+.indicator-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--accent), var(--chart-2));
+  animation: pulse 2s infinite;
+}
+
+.indicator-light.delay-1 {
+  animation-delay: 0.5s;
+}
+
+.indicator-light.delay-2 {
+  animation-delay: 1s;
+}
+
+.indicator-light.delay-3 {
+  animation-delay: 1.5s;
+}
+
+/* Utility classes */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-50 { z-index: 50; }
+
+.min-h-screen { min-height: 100vh; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.overflow-hidden { overflow: hidden; }
+.overflow-x-hidden { overflow-x: hidden; }
+.pointer-events-none { pointer-events: none; }
+
+.flex { display: flex; }
+.grid { display: grid; }
+.inline-block { display: inline-block; }
+.hidden { display: none; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.text-center { text-align: center; }
+.flex-col { flex-direction: column; }
+
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.space-x-4 > * + * { margin-left: 1rem; }
+.space-y-1 > * + * { margin-top: 0.25rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.p-12 { padding: 3rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.ml-1 { margin-left: 0.25rem; }
+
+.max-w-4xl { max-width: 56rem; }
+.max-w-6xl { max-width: 72rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.w-1 { width: 0.25rem; }
+.w-2 { width: 0.5rem; }
+.w-3 { width: 0.75rem; }
+.w-4 { width: 1rem; }
+.w-6 { width: 1.5rem; }
+.h-1 { height: 0.25rem; }
+.h-2 { height: 0.5rem; }
+.h-3 { height: 0.75rem; }
+.h-4 { height: 1rem; }
+.h-6 { height: 1.5rem; }
+.h-px { height: 1px; }
+.min-w-[300px] { min-width: 300px; }
+.min-h-[200px] { min-height: 200px; }
+
+/* Color utilities */
+.text-white { color: white; }
+.text-black { color: black; }
+.text-green-400 { color: #4ade80; }
+.text-accent { color: var(--accent); }
+.text-chart-2 { color: var(--chart-2); }
+.text-chart-4 { color: var(--chart-4); }
+.text-muted-foreground { color: var(--muted-foreground); }
+.text-white\/60 { color: rgba(255, 255, 255, 0.6); }
+.text-white\/80 { color: rgba(255, 255, 255, 0.8); }
+
+.bg-black { background-color: black; }
+.bg-black\/60 { background-color: rgba(0, 0, 0, 0.6); }
+.bg-black\/80 { background-color: rgba(0, 0, 0, 0.8); }
+.bg-black\/90 { background-color: rgba(0, 0, 0, 0.9); }
+.bg-gray-200 { background-color: #e5e7eb; }
+.bg-gray-300 { background-color: #d1d5db; }
+.bg-gray-400 { background-color: #9ca3af; }
+.bg-gray-600 { background-color: #4b5563; }
+.bg-gray-700 { background-color: #374151; }
+.bg-gray-800 { background-color: #1f2937; }
+.bg-green-400 { background-color: #4ade80; }
+.bg-accent { background-color: var(--accent); }
+
+.border { border-width: 1px; }
+.border-2 { border-width: 2px; }
+.border-green-400 { border-color: #4ade80; }
+.border-gray-400 { border-color: #9ca3af; }
+.border-gray-600 { border-color: #4b5563; }
+.border-gray-700 { border-color: #374151; }
+.border-cyan-400 { border-color: #22d3ee; }
+.border-pink-400 { border-color: #f472b6; }
+.border-accent { border-color: var(--accent); }
+.border-white { border-color: white; }
+
+.rounded-full { border-radius: 9999px; }
+
+.opacity-10 { opacity: 0.1; }
+.opacity-20 { opacity: 0.2; }
+.opacity-30 { opacity: 0.3; }
+.opacity-40 { opacity: 0.4; }
+.opacity-60 { opacity: 0.6; }
+.opacity-90 { opacity: 0.9; }
+
+.font-mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; }
+.font-bold { font-weight: 700; }
+
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-6xl { font-size: 3.75rem; line-height: 1; }
+
+.transform { transform: translate(0, 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1); }
+.transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-opacity { transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.duration-100 { transition-duration: 100ms; }
+.duration-200 { transition-duration: 200ms; }
+.duration-300 { transition-duration: 300ms; }
+.duration-1000 { transition-duration: 1000ms; }
+
+.translate-y-0 { transform: translateY(0px); }
+.translate-y-12 { transform: translateY(3rem); }
+.scale-95 { transform: scale(0.95); }
+.scale-100 { transform: scale(1); }
+.scale-102 { transform: scale(1.02); }
+.scale-105 { transform: scale(1.05); }
+.scale-110 { transform: scale(1.1); }
+.scale-125 { transform: scale(1.25); }
+
+.cursor-pointer { cursor: pointer; }
+
+.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+
+.backdrop-blur-sm { backdrop-filter: blur(4px); }
+
+/* Gradients */
+.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+.bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+.bg-gradient-to-t { background-image: linear-gradient(to top, var(--tw-gradient-stops)); }
+.bg-gradient-radial { background-image: radial-gradient(circle, var(--tw-gradient-stops)); }
+
+.from-accent { --tw-gradient-from: var(--accent); --tw-gradient-to: rgba(0, 255, 255, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.via-chart-2 { --tw-gradient-to: rgba(0, 255, 255, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--chart-2), var(--tw-gradient-to); }
+.to-chart-4 { --tw-gradient-to: var(--chart-4); }
+.via-white { --tw-gradient-stops: var(--tw-gradient-from), white, var(--tw-gradient-to); }
+
+.from-pink-500 { --tw-gradient-from: #ec4899; --tw-gradient-to: rgba(236, 72, 153, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-purple-500 { --tw-gradient-to: #a855f7; }
+.from-cyan-400 { --tw-gradient-from: #22d3ee; --tw-gradient-to: rgba(34, 211, 238, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-blue-500 { --tw-gradient-to: #3b82f6; }
+.from-purple-500 { --tw-gradient-from: #a855f7; --tw-gradient-to: rgba(168, 85, 247, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-pink-500 { --tw-gradient-to: #ec4899; }
+.from-blue-400 { --tw-gradient-from: #60a5fa; --tw-gradient-to: rgba(96, 165, 250, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-cyan-300 { --tw-gradient-to: #67e8f9; }
+
+.bg-clip-text { background-clip: text; -webkit-background-clip: text; }
+.text-transparent { color: transparent; }
+
+/* Responsive grid classes */
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Hover effects */
+.hover\:scale-102:hover { transform: scale(1.02); }
+.hover\:scale-105:hover { transform: scale(1.05); }
+.hover\:scale-110:hover { transform: scale(1.1); }
+.hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.hover\:bg-gray-400:hover { background-color: #9ca3af; }
+.hover\:bg-accent:hover { background-color: var(--accent); }
+.hover\:text-black:hover { color: black; }
+.hover\:border-gray-500:hover { border-color: #6b7280; }
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .sm\:flex-row { flex-direction: row; }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Vaporwave animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(400%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes glitch {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes checkerboard-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes matrix-flash {
+  0% { opacity: 0; transform: scale(1); }
+  10% { opacity: 0.8; transform: scale(1.05); }
+  20% { opacity: 0.9; transform: scale(1.02); }
+  30% { opacity: 0.7; transform: scale(1.08); }
+  40% { opacity: 0.95; transform: scale(1.01); }
+  50% { opacity: 0.6; transform: scale(1.06); }
+  60% { opacity: 0.85; transform: scale(1.03); }
+  70% { opacity: 0.5; transform: scale(1.04); }
+  80% { opacity: 0.3; transform: scale(1.01); }
+  90% { opacity: 0.1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.scan-animation { animation: scan 3s ease-in-out infinite; }
+.glitch-animation { animation: glitch 0.3s ease-in-out; }
+.animate-matrix-flash { animation: matrix-flash 1s ease-out forwards; }
+
+/* Checkerboard pattern */
+.checkerboard {
+  background-image: 
+    linear-gradient(45deg, rgba(255, 20, 147, 0.3) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 20, 147, 0.3) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0, 255, 255, 0.3) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0, 255, 255, 0.3) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  animation: checkerboard-move 4s linear infinite;
+}
+
+/* Dotted/stippled effect */
+.stippled {
+  background-image: radial-gradient(circle, rgba(0, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+/* Whitespace handling */
+.whitespace-pre-wrap { white-space: pre-wrap; }
+
+/* Custom vaporwave scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(138, 43, 226, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ff1493, #00ffff);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #00ffff, #ff1493);
+}
+
+/* Top positioning utilities */
+.top-1\/4 { top: 25%; }
+.top-1\/3 { top: 33.333333%; }
+.top-2\/3 { top: 66.666667%; }
+.top-3\/4 { top: 75%; }
+.bottom-1\/4 { bottom: 25%; }
+
+/* Mix blend mode */
+.mix-blend-difference { mix-blend-mode: difference; }
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+</head>
+<body translate="no">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ILLUMICON - LED &amp; Laser Art Village at DEFCON</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI+Variable:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+</head>
 <body>
-<h1>Hello World!</h1>
-<p>Lasers warming up… do not look directly into the mess</p>
+<div class="relative min-h-screen overflow-x-hidden" id="app">
+<!-- Background Animation Container -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="background-animation"></div>
+<!-- Flash Overlay -->
+<div class="fixed inset-0 z-50 pointer-events-none hidden" id="flash-overlay">
+<div class="absolute inset-0 bg-gradient-to-br from-accent via-white to-chart-2 opacity-0 animate-matrix-flash"></div>
+</div>
+<!-- Main Content -->
+<div class="relative z-10">
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center relative px-8 overflow-hidden" id="hero-section">
+<!-- Checkerboard background -->
+<div class="absolute inset-0 checkerboard opacity-20"></div>
+<!-- Stippled overlay -->
+<div class="absolute inset-0 stippled opacity-30"></div>
+<!-- Main content in retro window -->
+<div class="retro-window max-w-4xl w-full transition-all duration-1000 transform translate-y-12 opacity-0 scale-95" id="hero-window">
+<!-- Window header -->
+<div class="retro-window-header">
+<span class="text-sm">ILLUMICON.EXE</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button" onclick="handleWindowClose()">×</div>
+</div>
+</div>
+<!-- Window content -->
+<div class="p-12 text-center bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-sm">
+<h1 class="mb-8 bg-gradient-to-r from-accent via-chart-2 to-chart-4 bg-clip-text text-transparent glitch-animation" id="hero-title">
+                            ILLUMICON
+                        </h1>
+<div class="callout mb-8 text-white">
+                            LED &amp; LASER ART VILLAGE AT DEFCON
+                        </div>
+<div class="subheading mb-12 text-accent">
+                            AUGUST 7-10, 2024 • LAS VEGAS, NV
+                        </div>
+<div class="grid md:grid-cols-2 gap-8 mb-12">
+<div class="retro-window">
+<div class="retro-window-header">
+<span class="text-sm">ABOUT.TXT</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-black/80 text-green-400 font-mono text-sm">
+                                    &gt; INITIALIZING ILLUMICON...<br/>
+                                    &gt; LOADING LED MATRIX...<br/>
+                                    &gt; CALIBRATING LASERS...<br/>
+                                    &gt; HACKING THE LIGHT...<br/>
+                                    &gt; READY FOR INPUT_
+                                </div>
+</div>
+<div class="retro-window">
+<div class="retro-window-header">
+<span class="text-sm">STATS.EXE</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-gradient-to-br from-blue-900/50 to-purple-900/50 text-white">
+<div class="grid grid-cols-2 gap-4 text-center">
+<div>
+<div class="metric text-accent">100+</div>
+<div class="caption">ARTISTS</div>
+</div>
+<div>
+<div class="metric text-chart-2">24/7</div>
+<div class="caption">LIGHTS</div>
+</div>
+<div>
+<div class="metric text-chart-4">∞</div>
+<div class="caption">CREATIVITY</div>
+</div>
+<div>
+<div class="metric text-accent">1337</div>
+<div class="caption">HACKS</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<button class="btn-primary px-8 py-4 hover:shadow-lg transition-all duration-300 hover:scale-105" id="enter-matrix-btn">
+                                &gt; ENTER THE MATRIX
+                            </button>
+<div class="text-muted-foreground caption">
+                                [ PRESS ANY KEY TO CONTINUE ]
+                            </div>
+</div>
+</div>
+</div>
+<!-- Floating elements -->
+<div class="absolute inset-0 pointer-events-none" id="hero-floating-elements"></div>
+<!-- Scan lines effect -->
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="w-full h-px bg-gradient-to-r from-transparent via-accent to-transparent absolute top-1/4 scan-animation"></div>
+<div class="w-full h-px bg-gradient-to-r from-transparent via-chart-2 to-transparent absolute top-3/4 scan-animation" style="animation-delay: 1.5s;"></div>
+</div>
+</section>
+<!-- About Section -->
+<section class="min-h-screen flex items-center justify-center px-8 py-20 relative" id="about-section">
+<!-- Animated background pattern -->
+<div class="absolute inset-0 checkerboard opacity-10"></div>
+<div class="max-w-6xl mx-auto w-full">
+<div class="transition-all duration-1000 transform translate-y-12 opacity-0" id="about-content">
+<!-- Main terminal window -->
+<div class="retro-window mb-12">
+<div class="retro-window-header">
+<span class="text-sm">ABOUT_ILLUMICON.BAT</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-8 bg-black/90 text-green-400 font-mono text-lg min-h-[200px]">
+<pre class="whitespace-pre-wrap" id="terminal-text"></pre>
+<span class="inline-block w-2 h-6 bg-green-400 ml-1 animate-pulse"></span>
+</div>
+</div>
+<!-- Feature windows -->
+<div class="feature-grid mb-12">
+<div class="retro-window feature-card">
+<div class="retro-window-header">
+<span class="text-sm">LED_MATRIX.DLL</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="feature-content gradient-accent">
+<div class="feature-icon">⬢</div>
+<p>Interactive LED installations that respond to your touch, movement, and creativity. Create patterns that dance across massive displays.</p>
+<div class="progress-container">
+<div class="progress-bar gradient-accent" data-progress="0"></div>
+</div>
+<div class="progress-text">LOADING COMPLETE</div>
+</div>
+</div>
+<div class="retro-window feature-card">
+<div class="retro-window-header">
+<span class="text-sm">LASER_SHOW.EXE</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="feature-content gradient-chart-2">
+<div class="feature-icon">◊</div>
+<p>Precision laser art workshops where you'll learn to paint with light. From basic patterns to complex animations.</p>
+<div class="progress-container">
+<div class="progress-bar gradient-chart-2" data-progress="1"></div>
+</div>
+<div class="progress-text">LOADING COMPLETE</div>
+</div>
+</div>
+<div class="retro-window feature-card">
+<div class="retro-window-header">
+<span class="text-sm">HACK_LIGHT.SYS</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="feature-content gradient-chart-4">
+<div class="feature-icon">◈</div>
+<p>Hardware hacking sessions for makers and artists. Modify, create, and experiment with lighting technology.</p>
+<div class="progress-container">
+<div class="progress-bar gradient-chart-4" data-progress="2"></div>
+</div>
+<div class="progress-text">LOADING COMPLETE</div>
+</div>
+</div>
+</div>
+<!-- System Info Window -->
+<div class="retro-window">
+<div class="retro-window-header">
+<span class="text-sm">SYSTEM_INFO.INI</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="system-info-content">
+<div class="stats-grid">
+<div class="stat-item">
+<div class="stat-value">100+</div>
+<div class="stat-label">ARTISTS</div>
+<div class="stat-unit">CREATORS</div>
+<div class="stat-indicator">
+<div class="indicator-light"></div>
+</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">24</div>
+<div class="stat-label">WORKSHOPS</div>
+<div class="stat-unit">SESSIONS</div>
+<div class="stat-indicator">
+<div class="indicator-light delay-1"></div>
+</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">50+</div>
+<div class="stat-label">INSTALLATIONS</div>
+<div class="stat-unit">EXHIBITS</div>
+<div class="stat-indicator">
+<div class="indicator-light delay-2"></div>
+</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">96</div>
+<div class="stat-label">UPTIME</div>
+<div class="stat-unit">HOURS</div>
+<div class="stat-indicator">
+<div class="indicator-light delay-3"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating scan lines -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute w-full h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent scan-animation" style="top: 33%;"></div>
+<div class="absolute w-full h-px bg-gradient-to-r from-transparent via-chart-2/50 to-transparent scan-animation" style="top: 66%; animation-delay: 2s;"></div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="min-h-screen flex items-center justify-center px-8 py-20 relative" id="contact-section">
+<!-- Animated grid background -->
+<div class="absolute inset-0 stippled opacity-20"></div>
+<div class="max-w-6xl mx-auto w-full relative">
+<div class="transition-all duration-1000 transform translate-y-12 opacity-0" id="contact-content">
+<!-- Main header window -->
+<div class="retro-window mb-12">
+<div class="retro-window-header">
+<span class="text-sm">CONNECT.EXE</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-8 bg-gradient-to-br from-purple-900/40 to-pink-900/40 backdrop-blur-sm text-center">
+<h2 class="mb-4 bg-gradient-to-r from-chart-4 via-accent to-chart-2 bg-clip-text text-transparent">
+                                    JOIN THE NETWORK
+                                </h2>
+<div class="callout text-white mb-6">
+                                    Connect with fellow light hackers and digital artists
+                                </div>
+<!-- Network status -->
+<div class="flex justify-center items-center space-x-4 mb-6">
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+<span class="caption text-green-400">NETWORK: ONLINE</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 rounded-full bg-accent animate-pulse"></div>
+<span class="caption text-accent">SIGNAL: STRONG</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Connection options -->
+<div class="grid md:grid-cols-3 gap-8 mb-16">
+<div class="retro-window cursor-pointer transition-all duration-300 transform hover:scale-102 contact-card" data-card="0">
+<div class="retro-window-header">
+<span class="text-sm">DISCORD.EXE</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-gradient-to-br from-accent to-chart-2 bg-opacity-20 backdrop-blur-sm relative overflow-hidden">
+<div class="text-6xl mb-4 text-center stippled transition-transform duration-300 card-icon">◆</div>
+<h3 class="mb-4 text-center text-white">DISCORD</h3>
+<p class="mb-6 text-center text-white/80">Join our digital collective</p>
+<div class="bg-black/60 p-3 border border-green-400 font-mono text-green-400 text-sm text-center">
+                                        &gt; discord.gg/illumicon
+                                    </div>
+<div class="mt-4 flex justify-between items-center text-xs">
+<span class="text-white/60">STATUS:</span>
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-gradient-to-r from-accent to-chart-2 animate-pulse"></div>
+<span class="text-white/60">READY</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-br from-accent to-chart-2 transition-opacity duration-300 opacity-0 hover-overlay"></div>
+</div>
+</div>
+<div class="retro-window cursor-pointer transition-all duration-300 transform hover:scale-102 contact-card" data-card="1">
+<div class="retro-window-header">
+<span class="text-sm">SOCIAL.DLL</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-gradient-to-br from-chart-2 to-chart-4 bg-opacity-20 backdrop-blur-sm relative overflow-hidden">
+<div class="text-6xl mb-4 text-center stippled transition-transform duration-300 card-icon">◇</div>
+<h3 class="mb-4 text-center text-white">SOCIAL</h3>
+<p class="mb-6 text-center text-white/80">Follow the light updates</p>
+<div class="bg-black/60 p-3 border border-green-400 font-mono text-green-400 text-sm text-center">
+                                        &gt; @illumicon_defcon
+                                    </div>
+<div class="mt-4 flex justify-between items-center text-xs">
+<span class="text-white/60">STATUS:</span>
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-gradient-to-r from-chart-2 to-chart-4 animate-pulse"></div>
+<span class="text-white/60">READY</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-br from-chart-2 to-chart-4 transition-opacity duration-300 opacity-0 hover-overlay"></div>
+</div>
+</div>
+<div class="retro-window cursor-pointer transition-all duration-300 transform hover:scale-102 contact-card" data-card="2">
+<div class="retro-window-header">
+<span class="text-sm">SUBMIT.BAT</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-gradient-to-br from-chart-4 to-accent bg-opacity-20 backdrop-blur-sm relative overflow-hidden">
+<div class="text-6xl mb-4 text-center stippled transition-transform duration-300 card-icon">◈</div>
+<h3 class="mb-4 text-center text-white">SUBMIT</h3>
+<p class="mb-6 text-center text-white/80">Upload your creations</p>
+<div class="bg-black/60 p-3 border border-green-400 font-mono text-green-400 text-sm text-center">
+                                        &gt; art@illumicon.net
+                                    </div>
+<div class="mt-4 flex justify-between items-center text-xs">
+<span class="text-white/60">STATUS:</span>
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-gradient-to-r from-chart-4 to-accent animate-pulse"></div>
+<span class="text-white/60">READY</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-br from-chart-4 to-accent transition-opacity duration-300 opacity-0 hover-overlay"></div>
+</div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="text-center">
+<div class="retro-window inline-block">
+<div class="retro-window-header">
+<span class="text-sm">ACTION.EXE</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-gradient-to-br from-blue-900/40 to-purple-900/40 backdrop-blur-sm">
+<div class="callout mb-6 text-white">
+                                        Ready to illuminate the future?
+                                    </div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="btn-primary px-8 py-4 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                                            &gt; REGISTER_NOW
+                                        </button>
+<button class="btn-secondary px-8 py-4 border-2 border-accent text-white hover:bg-accent hover:text-black transition-all duration-300">
+                                            &gt; LEARN_MORE
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Popup dialog easter egg -->
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden" id="system-dialog">
+<div class="retro-window animate-pulse">
+<div class="retro-window-header">
+<span class="text-sm">SYSTEM_MESSAGE.DLG</span>
+<div class="retro-window-controls">
+<div class="retro-button" onclick="handleDialogClose()">×</div>
+</div>
+</div>
+<div class="p-6 bg-gray-200 text-black min-w-[300px]">
+<div class="flex items-center space-x-4 mb-4">
+<div class="text-2xl">⚠️</div>
+<div>
+<div class="font-bold">ILLUMICON.EXE</div>
+<div class="text-sm">Do you want to join the light collective?</div>
+</div>
+</div>
+<div class="flex justify-end space-x-2">
+<button class="px-4 py-2 bg-gray-300 border border-gray-400 text-black hover:bg-gray-400 transition-colors" onclick="handleDialogClose()">
+                                        OK
+                                    </button>
+<button class="px-4 py-2 bg-gray-300 border border-gray-400 text-black hover:bg-gray-400 transition-colors" onclick="handleDialogClose()">
+                                        CANCEL
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scan lines -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent top-1/4 scan-animation"></div>
+<div class="absolute w-full h-px bg-gradient-to-r from-transparent via-chart-2/30 to-transparent bottom-1/4 scan-animation" style="animation-delay: 1.5s;"></div>
+</div>
+</section>
+<!-- LED Grid Section -->
+<section class="min-h-screen flex flex-col items-center justify-center px-8 py-20 relative" id="led-grid-section">
+<!-- Checkerboard background -->
+<div class="absolute inset-0 checkerboard opacity-10"></div>
+<div class="w-full max-w-6xl">
+<!-- Main LED Grid Window -->
+<div class="retro-window mb-8 transition-all duration-1000 transform scale-95 opacity-0" id="led-grid-window">
+<div class="retro-window-header">
+<span class="text-sm">LED_MATRIX.SYS</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-8 bg-gradient-to-br from-black/90 to-purple-900/40 backdrop-blur-sm">
+<!-- Header -->
+<div class="text-center mb-8">
+<h2 class="mb-4 bg-gradient-to-r from-accent via-chart-2 to-chart-4 bg-clip-text text-transparent">INTERACTIVE LED WALL</h2>
+<div class="callout text-accent mb-4">Click the pixels to activate them!</div>
+<div class="bg-black/60 p-3 border border-green-400 font-mono text-green-400 text-sm inline-block mb-6">
+                                    &gt; STATUS: <span id="led-status">INITIALIZING...</span>
+</div>
+</div>
+<!-- LED Grid Container -->
+<div class="flex justify-center mb-6">
+<div class="grid gap-1 p-6 bg-black/80 border-2 border-gray-600 backdrop-blur-sm" id="led-grid" style="grid-template-columns: repeat(18, 1fr);"></div>
+</div>
+<!-- Control panel -->
+<div class="grid md:grid-cols-3 gap-4">
+<!-- Instructions window -->
+<div class="retro-window">
+<div class="retro-window-header">
+<span class="text-sm">HELP.TXT</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-6 bg-gray-100 text-black text-sm">
+<div class="font-bold mb-2">INSTRUCTIONS:</div>
+<ul class="text-xs space-y-1">
+<li>• Click pixels to light them</li>
+<li>• Watch the ripple effects</li>
+<li>• Create your own patterns</li>
+<li>• Enjoy the light show!</li>
+</ul>
+</div>
+</div>
+<!-- Stats window -->
+<div class="retro-window">
+<div class="retro-window-header">
+<span class="text-sm">STATS.LOG</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-4 bg-gray-100 text-black text-xs font-mono">
+<div>PIXELS: <span id="pixel-count">216</span></div>
+<div>ACTIVE: <span id="active-count">0</span></div>
+<div>COLORS: 9</div>
+<div>STATUS: ONLINE</div>
+</div>
+</div>
+<!-- Color palette -->
+<div class="retro-window">
+<div class="retro-window-header">
+<span class="text-sm">PALETTE.DAT</span>
+<div class="retro-window-controls">
+<div class="retro-button">_</div>
+<div class="retro-button">□</div>
+<div class="retro-button">×</div>
+</div>
+</div>
+<div class="p-4 bg-gray-100">
+<div class="grid grid-cols-3 gap-2" id="color-palette"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="text-center">
+<p class="caption text-white/80">Experience the fusion of art and technology at Illumicon DEFCON 2024</p>
+</div>
+</div>
+<!-- Floating scan lines -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute w-full h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent scan-animation" style="top: 20%;"></div>
+<div class="absolute w-full h-px bg-gradient-to-r from-transparent via-chart-2/40 to-transparent scan-animation" style="bottom: 20%; animation-delay: 2s;"></div>
+</div>
+</section>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+<script id="rendered-js">
+// Global state management
+const state = {
+  heroGlitchText: 'ILLUMICON',
+  heroWindowVisible: false,
+  aboutVisible: false,
+  aboutTerminalText: '',
+  contactVisible: false,
+  contactShowDialog: false,
+  contactDialogShown: false,
+  ledGridVisible: false,
+  ledGridStatus: 'INITIALIZING...',
+  leds: [],
+  particles: [],
+  mousePosition: { x: 0, y: 0 },
+  isFlashing: false };
+
+
+// Utility functions
+function createElement(tag, className = '', innerHTML = '') {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (innerHTML) element.innerHTML = innerHTML;
+  return element;
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Flash effect function
+function triggerFlash() {
+  if (state.isFlashing) return;
+
+  state.isFlashing = true;
+  const flashOverlay = document.getElementById('flash-overlay');
+  flashOverlay.classList.remove('hidden');
+
+  setTimeout(() => {
+    flashOverlay.classList.add('hidden');
+    state.isFlashing = false;
+  }, 1000);
+}
+
+// Window close handler
+function handleWindowClose() {
+  alert('Error: Cannot close ILLUMICON.exe');
+}
+
+// Dialog close handler
+function handleDialogClose() {
+  const dialog = document.getElementById('system-dialog');
+  dialog.classList.add('hidden');
+  alert('Connection established! Welcome to the grid.');
+}
+
+// Intersection Observer for animations
+function createIntersectionObserver(callback, threshold = 0.3) {
+  return new IntersectionObserver(callback, { threshold });
+}
+
+// Background Animation Component
+function initBackgroundAnimation() {
+  const container = document.getElementById('background-animation');
+
+  // Create background layers
+  const mainGradient = createElement('div', 'absolute inset-0 bg-gradient-to-br from-pink-600 via-purple-800 to-blue-600');
+  const secondaryGradient = createElement('div', 'absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/20');
+
+  container.appendChild(mainGradient);
+  container.appendChild(secondaryGradient);
+
+  // Initialize particles
+  const vaporwaveColors = ['#FF1493', '#00FFFF', '#8A2BE2', '#FF69B4', '#00BFFF', '#9370DB'];
+  const shapes = ['circle', 'square', 'triangle'];
+
+  for (let i = 0; i < 60; i++) {
+    const particle = {
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 4 + 2,
+      speedX: (Math.random() - 0.5) * 0.8,
+      speedY: (Math.random() - 0.5) * 0.8,
+      color: vaporwaveColors[Math.floor(Math.random() * vaporwaveColors.length)],
+      opacity: Math.random() * 0.4 + 0.2,
+      shape: shapes[Math.floor(Math.random() * shapes.length)] };
+
+    state.particles.push(particle);
+
+    const particleElement = createParticleElement(particle);
+    container.appendChild(particleElement);
+  }
+
+  // Grid pattern overlay
+  const gridPattern = createElement('div', 'absolute inset-0 opacity-10');
+  gridPattern.style.backgroundImage = `
+        linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px)
+    `;
+  gridPattern.style.backgroundSize = '100px 100px';
+  gridPattern.style.animation = 'checkerboard-move 8s linear infinite';
+  container.appendChild(gridPattern);
+
+  // Scan lines
+  const scanLines = createElement('div', 'absolute inset-0 opacity-20');
+  for (let i = 0; i < 3; i++) {
+    const scanLine = createElement('div', 'w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent absolute animate-pulse');
+    scanLine.style.top = `${20 + i * 30}%`;
+    scanLine.style.animation = `scan 4s ease-in-out infinite ${i}s`;
+    scanLines.appendChild(scanLine);
+  }
+  container.appendChild(scanLines);
+
+  // System windows
+  const systemWindow = createRetroWindow('SYSTEM.EXE', 'absolute top-4 left-4 opacity-60');
+  const systemContent = createElement('div', 'p-2 bg-black text-green-400 font-mono text-xs');
+  systemContent.innerHTML = '<div>CPU: 100%</div><div>RAM: 1337MB</div><div>STATUS: ONLINE</div>';
+  systemWindow.appendChild(systemContent);
+  container.appendChild(systemWindow);
+
+  // Status indicators
+  const statusContainer = createElement('div', 'absolute bottom-4 right-4 space-y-2 opacity-40');
+  statusContainer.innerHTML = `
+        <div class="bg-purple-600/80 px-3 py-1 text-white text-xs font-mono border border-cyan-400">
+            ILLUMICON.SYS LOADED
+        </div>
+        <div class="bg-cyan-600/80 px-3 py-1 text-black text-xs font-mono border border-pink-400">
+            LIGHT_MATRIX: ACTIVE
+        </div>
+    `;
+  container.appendChild(statusContainer);
+
+  // Radial gradient vignette
+  const vignette = createElement('div', 'absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/30');
+  container.appendChild(vignette);
+
+  // Animate particles
+  animateParticles();
+
+  // Glitch effect
+  setInterval(() => {
+    if (Math.random() > 0.95) {
+      showGlitchEffect();
+    }
+  }, 5000);
+}
+
+function createParticleElement(particle) {
+  const element = createElement('div', 'absolute transition-all duration-100');
+  updateParticleElement(element, particle);
+  return element;
+}
+
+function updateParticleElement(element, particle) {
+  element.style.left = particle.x + 'px';
+  element.style.top = particle.y + 'px';
+  element.style.opacity = particle.opacity;
+  element.style.filter = 'blur(0.5px)';
+
+  switch (particle.shape) {
+    case 'circle':
+      element.className = 'absolute transition-all duration-100 rounded-full';
+      element.style.width = particle.size + 'px';
+      element.style.height = particle.size + 'px';
+      element.style.backgroundColor = particle.color;
+      element.style.boxShadow = `0 0 ${particle.size * 3}px ${particle.color}`;
+      break;
+    case 'square':
+      element.className = 'absolute transition-all duration-100';
+      element.style.width = particle.size + 'px';
+      element.style.height = particle.size + 'px';
+      element.style.backgroundColor = particle.color;
+      element.style.boxShadow = `0 0 ${particle.size * 3}px ${particle.color}`;
+      break;
+    case 'triangle':
+      element.className = 'absolute transition-all duration-100';
+      element.style.width = '0';
+      element.style.height = '0';
+      element.style.backgroundColor = 'transparent';
+      element.style.borderLeft = `${particle.size / 2}px solid transparent`;
+      element.style.borderRight = `${particle.size / 2}px solid transparent`;
+      element.style.borderBottom = `${particle.size}px solid ${particle.color}`;
+      element.style.filter = `drop-shadow(0 0 ${particle.size * 2}px ${particle.color})`;
+      break;}
+
+}
+
+function animateParticles() {
+  const container = document.getElementById('background-animation');
+  const particleElements = container.querySelectorAll('.absolute.transition-all');
+
+  setInterval(() => {
+    state.particles.forEach((particle, index) => {
+      particle.x += particle.speedX;
+      particle.y += particle.speedY;
+
+      // Wrap around screen edges
+      if (particle.x < 0) particle.x = window.innerWidth;
+      if (particle.x > window.innerWidth) particle.x = 0;
+      if (particle.y < 0) particle.y = window.innerHeight;
+      if (particle.y > window.innerHeight) particle.y = 0;
+
+      // Mouse interaction
+      const distanceToMouse = Math.sqrt(
+      Math.pow(particle.x - state.mousePosition.x, 2) +
+      Math.pow(particle.y - state.mousePosition.y, 2));
+
+
+      if (distanceToMouse < 150) {
+        const angle = Math.atan2(state.mousePosition.y - particle.y, state.mousePosition.x - particle.x);
+        particle.x += Math.cos(angle) * 1.5;
+        particle.y += Math.sin(angle) * 1.5;
+      }
+
+      // Update element if it exists
+      if (particleElements[index]) {
+        updateParticleElement(particleElements[index], particle);
+      }
+    });
+  }, 16); // ~60fps
+}
+
+function showGlitchEffect() {
+  const container = document.getElementById('background-animation');
+  const glitchOverlay = createElement('div', 'absolute inset-0 mix-blend-difference');
+  glitchOverlay.innerHTML = '<div class="w-full h-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 opacity-30 animate-pulse"></div>';
+  container.appendChild(glitchOverlay);
+
+  setTimeout(() => {
+    if (container.contains(glitchOverlay)) {
+      container.removeChild(glitchOverlay);
+    }
+  }, 200);
+}
+
+function createRetroWindow(title, additionalClasses = '') {
+  const window = createElement('div', `retro-window ${additionalClasses}`);
+
+  const header = createElement('div', 'retro-window-header');
+  const titleSpan = createElement('span', 'text-sm', title);
+  const controls = createElement('div', 'retro-window-controls');
+
+  const minimizeBtn = createElement('div', 'retro-button', '_');
+  const maximizeBtn = createElement('div', 'retro-button', '□');
+  const closeBtn = createElement('div', 'retro-button', '×');
+
+  controls.appendChild(minimizeBtn);
+  controls.appendChild(maximizeBtn);
+  controls.appendChild(closeBtn);
+
+  header.appendChild(titleSpan);
+  header.appendChild(controls);
+  window.appendChild(header);
+
+  return window;
+}
+
+// Hero Section initialization
+function initHeroSection() {
+  // Create floating elements
+  const floatingContainer = document.getElementById('hero-floating-elements');
+  for (let i = 0; i < 8; i++) {
+    const floatingElement = createElement('div', 'absolute animate-pulse');
+    floatingElement.style.left = Math.random() * 100 + '%';
+    floatingElement.style.top = Math.random() * 100 + '%';
+    floatingElement.style.animationDelay = Math.random() * 3 + 's';
+    floatingElement.style.animationDuration = 2 + Math.random() * 2 + 's';
+    floatingElement.innerHTML = '<div class="w-4 h-4 bg-gradient-to-r from-accent to-chart-2 stippled"></div>';
+    floatingContainer.appendChild(floatingElement);
+  }
+
+  // Show hero window after delay
+  setTimeout(() => {
+    state.heroWindowVisible = true;
+    const heroWindow = document.getElementById('hero-window');
+    heroWindow.className = heroWindow.className.replace('translate-y-12 opacity-0 scale-95', 'translate-y-0 opacity-100 scale-100');
+  }, 500);
+
+  // Glitch effect for title
+  setInterval(() => {
+    if (Math.random() > 0.95) {
+      const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?░▒▓█';
+      const originalText = 'ILLUMICON';
+      let glitched = '';
+
+      for (let i = 0; i < originalText.length; i++) {
+        if (Math.random() > 0.7) {
+          glitched += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        } else {
+          glitched += originalText[i];
+        }
+      }
+
+      state.heroGlitchText = glitched;
+      const titleElement = document.getElementById('hero-title');
+      if (titleElement) {
+        titleElement.textContent = glitched;
+        titleElement.classList.add('glitch-animation');
+      }
+
+      setTimeout(() => {
+        state.heroGlitchText = 'ILLUMICON';
+        if (titleElement) {
+          titleElement.textContent = 'ILLUMICON';
+          titleElement.classList.remove('glitch-animation');
+        }
+      }, 150);
+    }
+  }, 2000);
+
+  // Enter Matrix button
+  const enterMatrixBtn = document.getElementById('enter-matrix-btn');
+  enterMatrixBtn.addEventListener('click', triggerFlash);
+}
+
+// About Section initialization
+function initAboutSection() {
+  const fullText = `> WELCOME TO ILLUMICON
+> THE ULTIMATE FUSION OF ART AND TECHNOLOGY
+> WHERE LEDS MEET LASERS AND CREATIVITY MEETS CODE
+> JOIN THE LIGHT REVOLUTION_`;
+
+  const observer = createIntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !state.aboutVisible) {
+      state.aboutVisible = true;
+      const aboutContent = document.getElementById('about-content');
+      aboutContent.className = aboutContent.className.replace('translate-y-12 opacity-0', 'translate-y-0 opacity-100');
+
+      // Start typewriter effect
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        state.aboutTerminalText = fullText.slice(0, i);
+        const terminalTextElement = document.getElementById('terminal-text');
+        if (terminalTextElement) {
+          terminalTextElement.textContent = state.aboutTerminalText;
+        }
+        i++;
+        if (i > fullText.length) {
+          clearInterval(typeInterval);
+        }
+      }, 50);
+
+      // Animate progress bars
+      setTimeout(() => {
+        const progressBars = document.querySelectorAll('[data-progress]');
+        progressBars.forEach((bar, index) => {
+          setTimeout(() => {
+            bar.style.width = '100%';
+          }, index * 500);
+        });
+      }, 1000);
+    }
+  });
+
+  const aboutSection = document.getElementById('about-section');
+  observer.observe(aboutSection);
+}
+
+// Contact Section initialization
+function initContactSection() {
+  // Card hover effects
+  const contactCards = document.querySelectorAll('.contact-card');
+  contactCards.forEach((card, index) => {
+    card.addEventListener('mouseenter', () => {
+      card.classList.add('scale-105', 'shadow-2xl');
+      const icon = card.querySelector('.card-icon');
+      const overlay = card.querySelector('.hover-overlay');
+      if (icon) icon.classList.add('scale-110');
+      if (overlay) {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-10');
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('scale-105', 'shadow-2xl');
+      const icon = card.querySelector('.card-icon');
+      const overlay = card.querySelector('.hover-overlay');
+      if (icon) icon.classList.remove('scale-110');
+      if (overlay) {
+        overlay.classList.add('opacity-0');
+        overlay.classList.remove('opacity-10');
+      }
+    });
+  });
+
+  const observer = createIntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !state.contactVisible) {
+      state.contactVisible = true;
+      const contactContent = document.getElementById('contact-content');
+      contactContent.className = contactContent.className.replace('translate-y-12 opacity-0', 'translate-y-0 opacity-100');
+
+      // Show dialog after delay (only once)
+      if (!state.contactDialogShown) {
+        setTimeout(() => {
+          state.contactDialogShown = true;
+          const dialog = document.getElementById('system-dialog');
+          dialog.classList.remove('hidden');
+        }, 1000);
+      }
+    }
+  });
+
+  const contactSection = document.getElementById('contact-section');
+  observer.observe(contactSection);
+}
+
+// LED Grid initialization
+function initLEDGrid() {
+  const vaporwaveColors = [
+  'bg-gradient-to-r from-pink-500 to-purple-500',
+  'bg-gradient-to-r from-cyan-400 to-blue-500',
+  'bg-gradient-to-r from-purple-500 to-pink-500',
+  'bg-gradient-to-r from-blue-400 to-cyan-300',
+  'bg-gradient-to-r from-pink-400 to-red-500',
+  'bg-gradient-to-r from-purple-400 to-blue-400',
+  'bg-gradient-to-r from-cyan-300 to-teal-400',
+  'bg-gradient-to-r from-pink-300 to-purple-400',
+  'bg-gradient-to-r from-blue-300 to-purple-400'];
+
+
+  // Create color palette
+  const colorPalette = document.getElementById('color-palette');
+  vaporwaveColors.forEach(color => {
+    const colorSwatch = createElement('div', `w-6 h-6 ${color} border border-gray-600`);
+    colorPalette.appendChild(colorSwatch);
+  });
+
+  // Initialize LED Grid
+  const ledGrid = document.getElementById('led-grid');
+  const gridSize = 18 * 12; // 18x12 grid
+  state.leds = [];
+
+  for (let i = 0; i < gridSize; i++) {
+    const led = {
+      id: i,
+      color: 'bg-gray-800',
+      isActive: false,
+      lastClicked: 0 };
+
+    state.leds.push(led);
+
+    const ledElement = createElement('div', 'w-4 h-4 cursor-pointer transition-all duration-200 transform border border-gray-700 bg-gray-800 opacity-40 hover:scale-110 hover:border-gray-500');
+    ledElement.setAttribute('data-id', i);
+    ledElement.addEventListener('click', () => handleLEDClick(i));
+
+    ledGrid.appendChild(ledElement);
+  }
+
+  // Boot sequence
+  setTimeout(() => updateLEDStatus('LOADING LED MATRIX...'), 1000);
+  setTimeout(() => updateLEDStatus('CALIBRATING PIXELS...'), 2000);
+  setTimeout(() => updateLEDStatus('SYSTEM READY'), 3000);
+
+  // Random LED activation
+  setInterval(() => {
+    if (Math.random() > 0.7) {
+      const randomIndex = Math.floor(Math.random() * state.leds.length);
+      const randomColor = vaporwaveColors[Math.floor(Math.random() * vaporwaveColors.length)];
+      activateLED(randomIndex, randomColor, true);
+
+      setTimeout(() => {
+        deactivateLED(randomIndex);
+      }, 1500);
+    }
+  }, 800);
+
+  // Intersection observer
+  const observer = createIntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !state.ledGridVisible) {
+      state.ledGridVisible = true;
+      const gridWindow = document.getElementById('led-grid-window');
+      gridWindow.className = gridWindow.className.replace('scale-95 opacity-0', 'scale-100 opacity-100');
+    }
+  });
+
+  const ledGridSection = document.getElementById('led-grid-section');
+  observer.observe(ledGridSection);
+}
+
+function updateLEDStatus(status) {
+  state.ledGridStatus = status;
+  const statusElement = document.getElementById('led-status');
+  if (statusElement) {
+    statusElement.textContent = status;
+  }
+}
+
+function handleLEDClick(ledId) {
+  const vaporwaveColors = [
+  'bg-gradient-to-r from-pink-500 to-purple-500',
+  'bg-gradient-to-r from-cyan-400 to-blue-500',
+  'bg-gradient-to-r from-purple-500 to-pink-500',
+  'bg-gradient-to-r from-blue-400 to-cyan-300',
+  'bg-gradient-to-r from-pink-400 to-red-500',
+  'bg-gradient-to-r from-purple-400 to-blue-400',
+  'bg-gradient-to-r from-cyan-300 to-teal-400',
+  'bg-gradient-to-r from-pink-300 to-purple-400',
+  'bg-gradient-to-r from-blue-300 to-purple-400'];
+
+
+  const randomColor = vaporwaveColors[Math.floor(Math.random() * vaporwaveColors.length)];
+  const now = Date.now();
+
+  activateLED(ledId, randomColor, true, now);
+
+  // Create ripple effect
+  const row = Math.floor(ledId / 18);
+  const col = ledId % 18;
+
+  for (let radius = 1; radius <= 3; radius++) {
+    setTimeout(() => {
+      state.leds.forEach((led, index) => {
+        const ledRow = Math.floor(index / 18);
+        const ledCol = index % 18;
+        const distance = Math.abs(ledRow - row) + Math.abs(ledCol - col);
+
+        if (distance === radius) {
+          activateLED(index, randomColor, true, now);
+        }
+      });
+    }, radius * 150);
+  }
+
+  // Deactivate after animation
+  setTimeout(() => {
+    state.leds.forEach((led, index) => {
+      if (led.lastClicked === now) {
+        deactivateLED(index);
+      }
+    });
+  }, 1000);
+}
+
+function activateLED(index, color, isActive, lastClicked = Date.now()) {
+  if (state.leds[index]) {
+    state.leds[index].color = color;
+    state.leds[index].isActive = isActive;
+    state.leds[index].lastClicked = lastClicked;
+
+    const ledElement = document.querySelector(`[data-id="${index}"]`);
+    if (ledElement) {
+      ledElement.className = `w-4 h-4 cursor-pointer transition-all duration-200 transform border scale-125 shadow-lg border-white ${color} opacity-90`;
+      ledElement.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.6)';
+      ledElement.style.filter = 'brightness(1.5)';
+    }
+
+    updateActiveCount();
+  }
+}
+
+function deactivateLED(index) {
+  if (state.leds[index]) {
+    state.leds[index].isActive = false;
+
+    const ledElement = document.querySelector(`[data-id="${index}"]`);
+    if (ledElement) {
+      ledElement.className = `w-4 h-4 cursor-pointer transition-all duration-200 transform border border-gray-700 ${state.leds[index].color} opacity-40 hover:scale-110 hover:border-gray-500`;
+      ledElement.style.boxShadow = 'none';
+      ledElement.style.filter = 'brightness(1)';
+    }
+
+    updateActiveCount();
+  }
+}
+
+function updateActiveCount() {
+  const activeCount = state.leds.filter(led => led.isActive).length;
+  const activeCountElement = document.getElementById('active-count');
+  if (activeCountElement) {
+    activeCountElement.textContent = activeCount;
+  }
+}
+
+// Mouse tracking for particle interaction
+document.addEventListener('mousemove', e => {
+  state.mousePosition.x = e.clientX;
+  state.mousePosition.y = e.clientY;
+});
+
+// Initialize application
+document.addEventListener('DOMContentLoaded', () => {
+  initBackgroundAnimation();
+  initHeroSection();
+  initAboutSection();
+  initContactSection();
+  initLEDGrid();
+});
+
+// Handle window resize
+window.addEventListener('resize', debounce(() => {
+  // Update particle positions if needed
+  state.particles.forEach(particle => {
+    if (particle.x > window.innerWidth) particle.x = window.innerWidth;
+    if (particle.y > window.innerHeight) particle.y = window.innerHeight;
+  });
+}, 250));
+    </script>
 </body>
 </html>
