@@ -476,8 +476,8 @@ button {
 .h-4 { height: 1rem; }
 .h-6 { height: 1.5rem; }
 .h-px { height: 1px; }
-.min-w-[300px] { min-width: 300px; }
-.min-h-[200px] { min-height: 200px; }
+.min-w-300px { min-width: 300px; }
+.min-h-200px { min-height: 200px; }
 
 /* Color utilities */
 .text-white { color: white; }
@@ -1080,13 +1080,12 @@ button {
                                         Ready to illuminate the future?
                                     </div>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-<button class="btn-primary px-8 py-4 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                                            &gt; REGISTER_NOW
-                                        </button>
-<button class="btn-secondary px-8 py-4 border-2 border-accent text-white hover:bg-accent hover:text-black transition-all duration-300">
-                                            &gt; LEARN_MORE
-                                        </button>
-</div>
+<a href="https://shop.defcon.org/products/def-con-33-ticket" target="_blank" rel="noopener" class="btn-primary px-8 py-4 hover:shadow-lg transition-all duration-300 hover:scale-105" style="text-decoration:none;display:inline-block;">
+    &gt; REGISTER_NOW
+</a>
+<a href="https://defcon.org/html/defcon-33/dc-33-communities.html#orga_41103" target="_blank" rel="noopener" class="btn-secondary px-8 py-4 border-2 border-accent text-white hover:bg-accent hover:text-black transition-all duration-300" style="text-decoration:none;display:inline-block;">
+    &gt; LEARN_MORE
+</a>
 </div>
 </div>
 </div>
@@ -1650,6 +1649,7 @@ function initLEDGrid() {
   'bg-gradient-to-r from-purple-500 to-pink-500',
   'bg-gradient-to-r from-blue-400 to-cyan-300',
   'bg-gradient-to-r from-pink-400 to-red-500',
+ 
   'bg-gradient-to-r from-purple-400 to-blue-400',
   'bg-gradient-to-r from-cyan-300 to-teal-400',
   'bg-gradient-to-r from-pink-300 to-purple-400',
