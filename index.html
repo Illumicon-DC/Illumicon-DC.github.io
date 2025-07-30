@@ -705,6 +705,11 @@ button {
 
 /* Mix blend mode */
 .mix-blend-difference { mix-blend-mode: difference; }
+
+.retro-window,
+.retro-window * {
+  pointer-events: auto;
+}
 </style>
 <script>
   window.console = window.console || function(t) {};
@@ -716,7 +721,7 @@ button {
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="background-animation"></div>
 <!-- Flash Overlay -->
 <div class="fixed inset-0 z-50 pointer-events-none hidden" id="flash-overlay">
-<div class="absolute inset-0 bg-gradient-to-br from-accent via-white to-chart-2 opacity-0 animate-matrix-flash"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-accent via-white to-chart-2 opacity-0 animate-matrix-flash"></div>
 </div>
 <!-- Main Content -->
 <div class="relative z-10">
