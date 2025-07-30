@@ -73,11 +73,16 @@ body {
 /* Typography */
 h1 {
   font-family: 'Georgia', serif;
-  font-size: 72px;
+  /* Responsive font size: min 2.5rem, preferred 8vw, max 4.5rem */
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 700;
   font-style: italic;
   line-height: 1.2;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 h2 {
@@ -706,19 +711,6 @@ button {
 </script>
 </head>
 <body translate="no">
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ILLUMICON - LED &amp; Laser Art Village at DEFCON</title>
-<link href="styles.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Segoe+UI+Variable:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-</head>
-<body>
 <div class="relative min-h-screen overflow-x-hidden" id="app">
 <!-- Background Animation Container -->
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="background-animation"></div>
@@ -943,7 +935,6 @@ button {
 <div class="stat-unit">HOURS</div>
 <div class="stat-indicator">
 <div class="indicator-light delay-3"></div>
-</div>
 </div>
 </div>
 </div>
@@ -1842,5 +1833,3 @@ window.addEventListener('resize', debounce(() => {
   });
 }, 250));
     </script>
-</body>
-</html>
